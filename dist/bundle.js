@@ -80,12 +80,10 @@ function init(){
     var app = new Vue({
         el: '#app',
         data: {
-            message: 'init！'
+            message: '初始化！'
         }
     })
-    console.log('aaaa！');
 }
-
 
 module.exports = {
     init: init
