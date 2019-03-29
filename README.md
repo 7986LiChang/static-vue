@@ -124,4 +124,40 @@
 
 
 
+#### 六、加载CSS/SCSS
 
+webpack默认只支持js模块化，如果要把scss等样式文件也当成模块，需要加载对应的loader解析器
+
+1. 安装`node-sass`、`css-loader`、`sass-loader`、`style-loader`
+
+   ```javascript
+   npm install node-sass@4.9.3 --save-dev
+   npm install css-loader@0.28.8 --save-dev
+   npm install sass-loader@6.0.6 --save-dev
+   npm install style-loader@0.19.1 --save-dev
+   ```
+
+2. 在webpack.config.js中进行配置
+
+   在module.exports中添加：
+
+   ```javascript
+   module: {
+           rules: [
+               {
+                   test: /\.css$/,
+                   use: ['style-loader','css-loader']
+               },
+               {
+                   test: /\.scss$/,
+                   use: ['style-loader','css-loader', 'sass-loader']
+               },
+               {
+                   test: /\.sass$/,
+                   use: ['style-loader','css-loader', 'sass-loader?indentedSyntax']
+               }
+           ]
+       }
+   ```
+
+   
