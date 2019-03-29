@@ -1,0 +1,19 @@
+/**
+ * @file _layout.scss
+ * @author: cdlichang1
+ * @describe: 基础布局
+ * @create: 2019-03-29 15:37 
+ */
+body,html {
+  font-size: 14px;
+  height: 100%;
+}
+body {
+  background-color: #fed;
+}
+
+#app{
+  width: 300px;
+  height: 500px;
+  margin: 0 auto;
+}
