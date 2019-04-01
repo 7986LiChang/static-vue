@@ -11,10 +11,22 @@
 <body>
     <div id="app">
         {{ message }}
+        <div v-html="messageHtml"></div>
+        <label for="changeColor">修改文字颜色</label>
+        <input type="checkbox" v-model="use" id="changeColor">
+        <br/>
+        <div v-bind:class="{'change-color': use}">
+            使用v-bind指令
+            <p v-if="see" v-on:click="seeMe">看到我了</p>
+            <a v-bind:href="url">链接跳转</a>
+        </div>
+        <input type="text" v-model="message">
+        <button @click="reverseMessage">反转字符串</button>
+        <p>当前时间：{{curDate | dateFormat(1)}}</p>
     </div>
 
     <div id="app-2">
-        <h3 v-bind:title="message">
+        <h3 :title="message">
             hover查看绑定信息
         </h3>
     </div>

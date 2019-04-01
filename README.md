@@ -160,4 +160,174 @@ webpack默认只支持js模块化，如果要把scss等样式文件也当成模�
        }
    ```
 
+# 学习记录
+
+> 路径计划：
+>
+> - [ ] 【20190401】模板语法、条件语句、循环语句、计算属性
+> - [ ] 【20190402】监听属性、样式绑定、事件处理器
+> - [ ] 【20190403】表单、组件、自定义指令、路由
+> - [ ] 【20190404】过渡&动画、混入、Ajax、响应接口
+> - [ ] 【20190405】vue-cli命令行工具使用，快读搭建大型单页应用，todo
+
+
+
+### 【20190401】模板语法
+
+- 每个 Vue 应用都需要通过实例化 Vue 来实现。
+
+- 核心：将实例属性响应式地与dom中元素绑定。实现数据与视图的独立。有点像模板语法。
+
+  ```
+  var vm = new Vue({
+          el: '#vue_det',
+          data: {
+              site: "菜鸟教程",
+              url: "www.runoob.com",
+              alexa: "10000"
+          },
+          methods: {
+              details: function() {
+                  return  this.site + " - 学的不仅是技术，更是梦想！";
+              }
+          }
+      })
+  ```
+
+  其中：
+
+   - data用于定义属性
+   - methods用于定义函数
+
+ - vue是**响应式**的，当一个vue实例被创建时，会向Vue的响应式系统中加入其data对象所能找到的全部属性。当这些属性值发生改变时，html视图就会产生相应变化。
+
+   data属性的取用：
+
+   - `vm.site`
+
+   - 在dom中，直接通过模板方式使用。
+
+     ```html
+     <div id="app">
+         {{ message }}
+     </div>
+     ```
+
+#### 一、模板语法
+
+> Vue.js 的核心是一个允许你采用简洁的模板语法来声明式的将数据渲染进 DOM 的系统。
+
+#### 插值
+
+##### 文本
+
+使用 `{{ ... }}` 插值
+
+
+
+##### Html
+
+使用`v-html`指令
+
+```javascript
+<div id="app">
+    {{ message }}
+    <div v-html="messageHtml"></div>
+</div>
+
+let app = new Vue({
+        el: '#app',  //绑定的元素
+        data: {
+            message: '初始化！',
+            messageHtml: `<span>好的，201904001</span>`
+        }
+    });
+```
+
+
+
+##### 属性
+
+HTML属性中的值使用`v-bind`指令。
+
+可用于切换class样式。
+
+
+
+##### 指令
+
+带有`v-` 前缀的特殊属性。可以在表达式的值改变时，将某些行为应用到DOM上。
+
+
+
+##### 参数
+
+参数在指令后面以冒号指明。`v-bind`响应地更新HTML属性。
+
+`v-bind:href="url"`使用data属性中的url作为href属性值。
+
+
+
+##### 修饰符
+
+修饰符是以半角句号 **.** 指明的特殊后缀，用于指出一个指令应该以特殊方式绑定。例如，**.prevent** 修饰符告诉 **v-on** 指令对于触发的事件调用 **event.preventDefault()**：
+
+
+
+##### 用户输入
+
+`v-model`指令，可以用来在`input、select、text、radio`等表单控件元素上创建**双向数据绑定**。可以用data中属性值初始化元素，根据表单输入的值，会在同步更新data中的值。
+
+
+
+##### 过滤器
+
+`filters`，由"管道符"指定，可以将一些常见文本格式化。
+
+使用方式：
+
+```javascript
+//在两个大括号中
+{{ message | dateFormat}}
+
+//在v-bind指令中
+<div v-bind:id="rawId | formatId（arg1, arg2）"></div>
+```
+
+过滤器函数可以接受参数，默认第一个参数是管道前的值。
+
+在Vue实例中添加filters属性，才能让过滤器生效。
+
+
+
+##### 缩写
+
+- v-bind html属性 缩写：使用" : "
+
+- v-on 事件绑定 缩写：使用“ @ ”
+
+```html
+<!-- 完整语法 -->
+<a v-bind:href="url"></a>
+<!-- 缩写 -->
+<a :href="url"></a>
+
+<!-- 完整语法 -->
+<a v-on:click="doSomething"></a>
+<!-- 缩写 -->
+<a @click="doSomething"></a>
+```
+
+#### 二、总结
+
+| 指令、Vue实例属性 | 说明介绍 |
+| --------- | -------- |
+| el | 绑定Vue实例的dom元素 |
+| data           | 基础数据 |
+| methods        | 基本函数 |
+| filters | 过滤器 |
+| v-bind | html属性，例如`v-bind:title, v-bind:href`。缩写用“：”，`:title, :href` |
+| v-model | `input、select、text、radio`等用户输入的表单元素上，数据双向绑定 |
+| v-on | 绑定事件。例如`v-on:click`缩写用“@”，`@:click` |
+
    
